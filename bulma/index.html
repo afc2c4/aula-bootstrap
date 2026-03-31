@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bulma Ops Dashboard</title>
+  <meta name="description" content="Dashboard responsivo com recursos da Bulma na versao mais recente." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@latest/css/bulma.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Pular para conteudo principal</a>
+
+  <nav class="navbar is-transparent" role="navigation" aria-label="Navegacao principal">
+    <div class="container is-fluid">
+      <div class="navbar-brand">
+        <a class="navbar-item brand" href="#">Bulma Ops</a>
+
+        <button class="navbar-burger" type="button" aria-label="menu" aria-expanded="false" data-target="mainNavbar">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div id="mainNavbar" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="#visao-geral">Visao geral</a>
+          <a class="navbar-item" href="#projetos">Projetos</a>
+          <a class="navbar-item" href="#equipe">Equipe</a>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <button id="openModalButton" class="button is-primary is-light">Novo alerta</button>
+              <button class="button is-link">Exportar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="section pt-4">
+    <div class="container is-fluid">
+      <nav class="breadcrumb mb-4" aria-label="breadcrumbs">
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Operacoes</a></li>
+          <li class="is-active"><a href="#" aria-current="page">Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <div class="columns is-variable is-5">
+        <aside class="column is-12-mobile is-4-tablet is-3-desktop">
+          <div class="box panel-box">
+            <p class="menu-label">Navegacao</p>
+            <aside class="menu">
+              <ul class="menu-list">
+                <li><a class="is-active" href="#visao-geral">Visao geral</a></li>
+                <li><a href="#metricas">Metricas</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#tarefas">Tarefas</a></li>
+              </ul>
+              <p class="menu-label">Equipe</p>
+              <ul class="menu-list">
+                <li><a href="#">Design</a></li>
+                <li><a href="#">Front-end</a></li>
+                <li><a href="#">QA</a></li>
+              </ul>
+            </aside>
+          </div>
+
+          <div class="notification is-success is-light mb-4">
+            Deploy de producao concluido com sucesso.
+          </div>
+
+          <div class="notification is-warning is-light">
+            2 revisoes de codigo aguardando feedback.
+          </div>
+        </aside>
+
+        <section class="column is-12-mobile is-8-tablet is-9-desktop">
+          <header id="visao-geral" class="level is-mobile mb-4">
+            <div class="level-left">
+              <div>
+                <h1 class="title is-3 mb-2">Painel de Operacoes</h1>
+                <p class="subtitle is-6 mb-0 has-text-grey">Monitoramento diario de produto e entregas</p>
+              </div>
+            </div>
+
+            <div class="level-right is-hidden-mobile">
+              <div class="dropdown" id="statusDropdown">
+                <div class="dropdown-trigger">
+                  <button class="button is-info is-light" type="button" aria-haspopup="true" aria-controls="statusDropdownMenu">
+                    <span>Status: Semana atual</span>
+                    <span class="icon is-small">
+                      <i aria-hidden="true">v</i>
+                    </span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="statusDropdownMenu" role="menu">
+                  <div class="dropdown-content">
+                    <a href="#" class="dropdown-item is-active">Semana atual</a>
+                    <a href="#" class="dropdown-item">Ultimos 30 dias</a>
+                    <a href="#" class="dropdown-item">Trimestre</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div id="metricas" class="columns is-multiline mb-1">
+            <div class="column is-12-mobile is-6-tablet is-3-desktop">
+              <article class="card metric-card">
+                <div class="card-content">
+                  <p class="heading">Usuarios ativos</p>
+                  <p class="title">12.4K</p>
+                  <span class="tag is-success is-light">+8.3%</span>
+                </div>
+              </article>
+            </div>
+
+            <div class="column is-12-mobile is-6-tablet is-3-desktop">
+              <article class="card metric-card">
+                <div class="card-content">
+                  <p class="heading">Conversao</p>
+                  <p class="title">6.8%</p>
+                  <span class="tag is-link is-light">Estavel</span>
+                </div>
+              </article>
+            </div>
+
+            <div class="column is-12-mobile is-6-tablet is-3-desktop">
+              <article class="card metric-card">
+                <div class="card-content">
+                  <p class="heading">NPS</p>
+                  <p class="title">74</p>
+                  <span class="tag is-success is-light">Recorde</span>
+                </div>
+              </article>
+            </div>
+
+            <div class="column is-12-mobile is-6-tablet is-3-desktop">
+              <article class="card metric-card">
+                <div class="card-content">
+                  <p class="heading">Erros criticos</p>
+                  <p class="title">03</p>
+                  <span class="tag is-danger is-light">Atencao</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="tabs is-boxed mb-4" id="projetos">
+            <ul>
+              <li class="is-active"><a href="#">Roadmap</a></li>
+              <li><a href="#">Backlog</a></li>
+              <li><a href="#">Incidentes</a></li>
+            </ul>
+          </div>
+
+          <div class="box panel-box mb-5">
+            <div class="content">
+              <h2 class="title is-5">Resumo de sprint</h2>
+              <p class="is-size-6">
+                O time fechou a semana com foco em performance de frontend, reducao de bugs de formulario e melhoria
+                da acessibilidade em componentes-chave.
+              </p>
+              <p>
+                Etiquetas de prioridade:
+                <span class="tags are-medium">
+                  <span class="tag is-danger">Alta</span>
+                  <span class="tag is-warning">Media</span>
+                  <span class="tag is-success">Baixa</span>
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="box panel-box mb-5" id="tarefas">
+            <h2 class="title is-5 mb-4">Tabela de atividades</h2>
+            <div class="table-container">
+              <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                  <tr>
+                    <th>Tarefa</th>
+                    <th>Responsavel</th>
+                    <th>Status</th>
+                    <th>Prioridade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Refatorar componente de cards</td>
+                    <td>Luiza</td>
+                    <td><span class="tag is-link is-light">Em andamento</span></td>
+                    <td><span class="tag is-warning">Media</span></td>
+                  </tr>
+                  <tr>
+                    <td>Validacao de formularios</td>
+                    <td>Renato</td>
+                    <td><span class="tag is-success is-light">Concluida</span></td>
+                    <td><span class="tag is-success">Baixa</span></td>
+                  </tr>
+                  <tr>
+                    <td>Auditoria de acessibilidade</td>
+                    <td>Camila</td>
+                    <td><span class="tag is-danger is-light">Bloqueada</span></td>
+                    <td><span class="tag is-danger">Alta</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <nav class="pagination is-centered mt-4" role="navigation" aria-label="pagination">
+              <a class="pagination-previous" href="#">Anterior</a>
+              <a class="pagination-next" href="#">Proxima</a>
+              <ul class="pagination-list">
+                <li><a class="pagination-link is-current" aria-label="Page 1" aria-current="page" href="#">1</a></li>
+                <li><a class="pagination-link" aria-label="Goto page 2" href="#">2</a></li>
+                <li><a class="pagination-link" aria-label="Goto page 3" href="#">3</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="box panel-box" id="equipe">
+            <h2 class="title is-5 mb-4">Formulario de registro de tarefa</h2>
+
+            <form action="#" method="post">
+              <div class="columns is-multiline">
+                <div class="column is-12-tablet is-6-desktop">
+                  <label class="label" for="titulo">Titulo</label>
+                  <div class="control">
+                    <input id="titulo" name="titulo" class="input" type="text" placeholder="Ex: Revisar dashboard" required />
+                  </div>
+                </div>
+
+                <div class="column is-12-tablet is-6-desktop">
+                  <label class="label" for="categoria">Categoria</label>
+                  <div class="control select is-fullwidth">
+                    <select id="categoria" name="categoria" required>
+                      <option value="" selected disabled>Selecione</option>
+                      <option>Produto</option>
+                      <option>Frontend</option>
+                      <option>Suporte</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="column is-12">
+                  <label class="label" for="descricao">Descricao</label>
+                  <div class="control">
+                    <textarea id="descricao" name="descricao" class="textarea" rows="4" placeholder="Detalhe a tarefa"></textarea>
+                  </div>
+                </div>
+
+                <div class="column is-12-tablet is-8-desktop">
+                  <label class="label">Anexo</label>
+                  <div class="file has-name is-fullwidth">
+                    <label class="file-label">
+                      <input class="file-input" type="file" name="anexo" id="anexo" />
+                      <span class="file-cta">
+                        <span class="file-label">Escolher arquivo</span>
+                      </span>
+                      <span class="file-name" id="fileName">Nenhum arquivo selecionado</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="column is-12-tablet is-4-desktop">
+                  <label class="label">Visibilidade</label>
+                  <label class="checkbox mt-2">
+                    <input type="checkbox" name="publico" />
+                    Tornar tarefa visivel para todo o time
+                  </label>
+                </div>
+
+                <div class="column is-12 has-text-right">
+                  <button class="button is-primary">Salvar tarefa</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+
+      <p class="has-text-centered has-text-grey mt-6 is-size-7 is-hidden-touch">
+        Exemplo com helpers Bulma: has-text-grey, mt-6, is-size-7, is-hidden-touch
+      </p>
+    </div>
+  </main>
+
+  <div id="alertModal" class="modal" aria-hidden="true">
+    <div class="modal-background" data-close-modal></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Criar alerta rapido</p>
+        <button class="delete" aria-label="close" data-close-modal></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label" for="alertTitle">Titulo do alerta</label>
+          <div class="control">
+            <input id="alertTitle" class="input" type="text" placeholder="Ex: Pico de erros no checkout" />
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="alertLevel">Nivel</label>
+          <div class="control select is-fullwidth">
+            <select id="alertLevel">
+              <option>Informativo</option>
+              <option>Atencao</option>
+              <option>Critico</option>
+            </select>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-primary">Salvar</button>
+        <button class="button" data-close-modal>Cancelar</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
