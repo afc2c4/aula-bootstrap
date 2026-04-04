@@ -1,3 +1,45 @@
+
+### Visão Geral
+
+Antes de tocarmos em qualquer código, é fundamental alinharmos nossa filosofia de desenvolvimento, especialmente porque estamos limitando nossa stack ao HTML5 puro e Bootstrap 5.3+.
+
+1.  **Semântica HTML5 e SEO:** Nossa principal arma para SEO on-page e acessibilidade será o uso rigoroso de *landmark tags* (`<header>`, `<main>`, `<section>`, `<article>`, `<footer>`). Os robôs do Google e os leitores de tela não enxergam o design; eles leem a estrutura. Garantiremos que haja apenas um `<h1>` por página (a promessa principal) e que a hierarquia de `<h2>` e `<h3>` não seja "pulada". Isso melhora o rastreamento e a navegação por teclado.
+2.  **Bootstrap 5.3 (Mobile-First e Utilitários):** Não vamos usar o Bootstrap apenas para copiar componentes prontos. Vamos utilizá-lo como um *Design System*. 
+    * O uso de `.container` será preferido em relação ao `.container-fluid` na maioria das seções para limitar o *line-length* (comprimento da linha) do texto, otimizando a legibilidade em monitores ultrawide. 
+    * O grid (`.row`, `.col-*`) e os utilitários de flexbox (`.d-flex`, `.justify-content-*`) serão aplicados pensando primariamente no celular (classes base) e escalando para desktop (classes `-md`, `-lg`), evitando quebras de layout indesejadas em tabelas de preços ou grades curriculares.
+    * **Conversão:** CTAs (Call to Actions) usarão utilitários de contraste extremo (ex: `.btn-primary` com cores quentes ou alto contraste sobre fundos escuros) e tamanhos adequados para *touch targets* no mobile (`.btn-lg`, `.w-100` em telas pequenas).
+
+---
+
+### Fase 0: Contextualização do Produto
+
+Para que as nossas escolhas de classes visuais, pesos de tipografia e estrutura de conversão façam sentido, preciso que você me passe o briefing. Por favor, responda a estas 3 perguntas curtas:
+
+1.  **Público-alvo:** O curso é focado na base (HTML/CSS/JS puro para iniciantes) ou em uma stack avançada (ex: arquitetura em React/Vue/Angular, micro-frontends)?
+2.  **A Promessa Principal (Transformação):** Qual é a grande dor que este curso resolve? (ex: "Conseguir a primeira vaga em 6 meses", "Dominar o front-end moderno sem depender de tutoriais", "Aumentar a renda com freelas de automação e UI").
+3.  **Identidade Visual:** Qual é a *vibe* desejada para a página? (ex: Tema escuro/Cyberpunk com tons de neon, ou Tema claro/Clean e corporativo com azul e branco?).
+
+---
+O curso é focado em base, para conseguir a primeira vaga em 6 meses, tema escuro/clean e corporativo com azul e branco
+
+---
+
+Excelente direcionamento. O foco em iniciantes e a promessa de "primeira vaga em 6 meses" nos dá um alvo claríssimo para a conversão. A escolha do tema escuro com tons corporativos (azul e branco) transmite modernidade e, ao mesmo tempo, segurança e estabilidade, características fundamentais para quem está buscando entrar no mercado de trabalho.
+
+Vamos iniciar a **Fase 1: Setup, Navbar e Hero Section (Acima da Dobra)**.
+
+### Defesa Arquitetural e Semântica (Fase 1)
+
+1.  **Setup e Tema Nativo (Bootstrap 5.3):** No HTML5, usaremos o atributo `data-bs-theme="dark"` direto na tag `<html>`. Isso aproveita o sistema de cores nativo da versão 5.3 para o tema escuro, garantindo fundos escuros e textos com contraste adequado (branco/cinza claro) sem precisarmos escrever CSS customizado nesta etapa.
+2.  **Semântica de Cabeçalho (`<header>` e `<nav>`):** O menu de navegação ficará dentro de um `<header>` semântico. Usaremos a classe `.fixed-top` na Navbar. *Por que?* Em Landing Pages longas, o CTA principal deve estar sempre a um clique de distância. Ter um botão "Garantir Vaga" no menu fixo aumenta drasticamente a taxa de conversão.
+3.  **A Seção Hero (`<main>` e `<section>`):** * Abriremos a tag `<main>` logo após o header, indicando aos motores de busca onde o conteúdo principal começa.
+    * **A Promessa (SEO e Conversão):** A tag `<h1>` conterá a promessa principal ("Conquiste sua primeira vaga em 6 meses"). Esta é a tag mais importante da página para o Google. Usaremos a classe `.display-4` e `.fw-bold` para dar peso visual de título primário.
+    * **Contraste e Foco (UX):** Destacaremos palavras-chave com a cor azul (`.text-primary`). O botão principal (CTA) usará `.btn-primary` e `.btn-lg`. 
+    * **Mobile-First (Grid e Flexbox):** No celular, o layout da Hero será em uma única coluna com texto centralizado (`.text-center` na classe base do container/row). No desktop, ele quebra para a esquerda (`.text-lg-start`), deixando espaço na direita para uma futura imagem, gráfico ou formulário. O CTA ocupará 100% da largura da tela no mobile (utilizando um wrapper com `.d-grid`), facilitando o clique com o polegar, mas voltará ao tamanho normal em telas maiores (`.d-lg-block`).
+
+Aqui está o código inicial e a estrutura da Fase 1:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
 <head>
@@ -6,7 +48,6 @@
     <title>Curso Front-End: Sua Primeira Vaga em 6 Meses</title>
     <meta name="description" content="Domine a base do HTML, CSS e JavaScript. O método validado para você conquistar sua primeira vaga de Desenvolvedor Front-End em até 6 meses.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
 
@@ -83,6 +124,35 @@
                 </div>
             </div>
         </section>
+        
+    </main>
+
+</body>
+</html>
+```
+
+### **Fase 2 (Dores e Benefícios)**
+
+Perfeito. Vamos avançar para a **Fase 2: Seção de Dores/Benefícios (Prova de Valor)**. 
+
+### Defesa Arquitetural e Semântica (Fase 2)
+
+Agora que prendemos a atenção do usuário na Hero com a promessa, precisamos gerar conexão e mostrar que entendemos o problema dele. Para um iniciante querendo a primeira vaga em 6 meses, a maior dor costuma ser o "Tutorial Hell" (ficar preso copiando tutoriais sem entender a base) e a falta de um portfólio real.
+
+1.  **Semântica (`<section>`, `<h2>`, `<h3>`):** * Iniciaremos uma nova `<section id="beneficios">`. O `id` é crucial aqui para que a âncora do menu que criamos na Fase 1 funcione perfeitamente.
+    * A hierarquia de títulos desce logicamente para um `<h2>` (Título da Seção) e `<h3>` (Títulos dos Cards). Isso cria uma árvore de acessibilidade impecável para leitores de tela.
+2.  **Contraste Visual e Separação (UX):**
+    * Usaremos a classe `.bg-body-tertiary` nesta seção. No tema escuro nativo do Bootstrap 5.3, isso aplicará um tom de cinza sutilmente diferente do fundo da Hero (`.bg-body`), criando uma quebra visual elegante sem precisarmos de CSS extra.
+3.  **Grid Automático e Mobile-First (`.row-cols-*`):**
+    * Para os cards de benefícios, usaremos o sistema de colunas utilitárias `.row-cols-1 .row-cols-md-2 .row-cols-lg-3`. Essa é a forma mais pragmática de lidar com grids em Landing Pages:
+        * No mobile (telas pequenas): Tudo empilha em 1 coluna, exigindo rolagem (ideal para o polegar).
+        * No tablet (`-md`): Quebra em 2 colunas.
+        * No desktop (`-lg`): Alinha perfeitamente em 3 colunas, ocupando toda a tela com respiro.
+4.  **Cards Simplificados:** Não usaremos bordas pesadas. Vamos usar `.border-secondary-subtle` e `.shadow-sm` para dar uma leve elevação aos blocos, mantendo o aspecto corporativo e *clean*.
+
+Aqui está o código. Ele deve ser inserido logo após o fechamento da `<section class="hero-section">` e antes do fechamento da tag `</main>`:
+
+```html
         <section id="beneficios" class="py-5 py-lg-6 bg-body-tertiary border-bottom border-secondary-subtle">
             <div class="container py-4">
                 
@@ -152,6 +222,25 @@
 
             </div>
         </section>
+```
+
+### **Fase 3: Grade Curricular (O Conteúdo)**
+
+Excelente. Chegamos ao "coração" do produto: **Fase 3: Grade Curricular (O Conteúdo)**.
+
+### Defesa Arquitetural e Semântica (Fase 3)
+
+Apresentar a ementa de um curso pode facilmente poluir a tela e assustar um iniciante. A estratégia de UI/UX aqui é usar a **Divulgação Progressiva** (Progressive Disclosure) através do componente Accordion do Bootstrap.
+
+1.  **Semântica e Acessibilidade (ARIA):** * Iniciaremos a `<section id="curriculo">`. Retornaremos ao fundo padrão (`.bg-body`) para criar o contraste com a seção anterior.
+    * Como estamos escrevendo o HTML puro agora, a preparação para o comportamento dinâmico (abrir/fechar) exige extrema atenção aos atributos do Bootstrap (`data-bs-toggle`, `data-bs-target`) e atributos ARIA (`aria-expanded`, `aria-controls`). Quando o JS do Bootstrap for injetado posteriormente, os leitores de tela saberão exatamente qual botão controla qual painel de conteúdo.
+    * Os botões do Accordion (`<button class="accordion-button">`) atuarão nativamente como elementos de foco pelo teclado (Tab).
+2.  **Controle de Largura (UX e Leitura):** * Não deixaremos o Accordion ocupar 100% da largura em telas grandes. Textos muito longos horizontalmente cansam a visão. Vamos englobar o Accordion em uma coluna centralizada de tamanho máximo moderado (`.col-lg-8` ou `.col-md-10`). No mobile, ele assumirá 100% da largura naturalmente.
+3.  **Foco em Conversão (Módulo Bônus):** * Adicionaremos um toque de marketing visual: o último módulo será destacado (ex: Empregabilidade) usando utilitários de borda sutilmente diferentes para gerar percepção de valor extra.
+
+Aqui está a estrutura da Fase 3. Este bloco entra logo após a `<section id="beneficios">`:
+
+```html
         <section id="curriculo" class="py-5 py-lg-6">
             <div class="container py-4">
                 
@@ -247,6 +336,32 @@
 
             </div>
         </section>
+```
+
+A estrutura de conteúdo baseada no componente Accordion `.accordion-flush` empacota a grade de maneira limpa, pronta para receber interatividade via JavaScript posteriormente (mais tarde).
+
+### **Fase 4: Oferta, Pricing e Garantia (Fechamento)**
+
+Excelente. Chegamos ao momento de "fechar a venda": **Fase 4: Oferta, Pricing e Garantia**.
+
+### Defesa Arquitetural e Semântica (Fase 4)
+
+A seção de preços é onde a conversão acontece ou morre. O design aqui precisa remover qualquer atrito cognitivo e passar extrema segurança.
+
+1.  **Semântica (`<section>`, `<article>` ou Card):** * Vamos criar uma `<section id="oferta">` (alvo dos nossos botões CTA anteriores).
+    * O elemento do preço em si será construído usando a estrutura de `.card` do Bootstrap, que semanticamente agrupa a oferta.
+2.  **Contraste Absoluto (Foco Visual):**
+    * Aplicaremos um fundo levemente mais escuro ou usaremos um utilitário de gradiente/sombra intensa no card para destacá-lo do resto da página. O card receberá a classe `.border-primary` para mostrar que é a ação principal.
+3.  **Âncora de Valor (Pricing Psychology):**
+    * Usaremos a tag `<s>` (ou a classe `.text-decoration-line-through`) para mostrar o preço original (o valor percebido) e uma tipografia gigante (`.display-5`, `.fw-bold`) para o preço com desconto (o valor pago). Isso é o feijão com arroz da alta conversão.
+4.  **Botão de CTA Primário:**
+    * O botão de compra deve ser o elemento mais visível da tela. Usaremos `.btn-primary`, `.btn-lg`, `.w-100` (ocupando toda a largura do card, excelente para clique no mobile), e `.py-3` para deixá-lo mais alto.
+5.  **Garantia e Redução de Risco:**
+    * Imediatamente abaixo do botão, colocaremos o aviso da Garantia Incondicional de 7 dias, usando ícones de verificação e texto menor (`.small`, `.text-muted`) para passar tranquilidade sem roubar o foco do botão.
+
+Aqui está o código. Ele entra logo após a `<section id="curriculo">`:
+
+```html
         <section id="oferta" class="py-5 py-lg-6 bg-body-tertiary">
             <div class="container py-4">
                 
@@ -318,112 +433,11 @@
 
             </div>
         </section>
-        <section id="faq" class="py-5 py-lg-6">
-            <div class="container py-4">
-                
-                <div class="row justify-content-center mb-5">
-                    <div class="col-12 col-md-8 text-center">
-                        <h2 class="display-6 fw-bold mb-3">Ainda tem dúvidas?</h2>
-                        <p class="lead text-body-secondary">
-                            Encontre as respostas para as perguntas mais comuns dos nossos alunos.
-                        </p>
-                    </div>
-                </div>
+```
 
-                <div class="row justify-content-center">
-                    <div class="col-12 col-lg-8">
-                        
-                        <div class="accordion accordion-flush border border-secondary-subtle rounded-3 overflow-hidden shadow-sm" id="accordionFaq">
-                            
-                            <div class="accordion-item bg-body">
-                                <h3 class="accordion-header" id="faqHeading1">
-                                    <button class="accordion-button collapsed fw-bold py-3 fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="false" aria-controls="faqCollapse1">
-                                        Preciso ter conhecimento prévio em programação?
-                                    </button>
-                                </h3>
-                                <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#accordionFaq">
-                                    <div class="accordion-body text-body-secondary pt-0 pb-4">
-                                        Não! O curso foi desenhado exatamente para quem está começando do zero absoluto. Vamos te guiar desde a instalação das ferramentas até a lógica de programação mais complexa, passo a passo.
-                                    </div>
-                                </div>
-                            </div>
+### Pausa Rigorosa para Revisão
 
-                            <div class="accordion-item bg-body">
-                                <h3 class="accordion-header" id="faqHeading2">
-                                    <button class="accordion-button collapsed fw-bold py-3 fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
-                                        Como funciona o suporte se eu travar em algum código?
-                                    </button>
-                                </h3>
-                                <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#accordionFaq">
-                                    <div class="accordion-body text-body-secondary pt-0 pb-4">
-                                        Temos uma comunidade exclusiva no Discord apenas para alunos, além do suporte direto na plataforma de aulas. Você nunca estará sozinho. Se o código quebrar, nossa equipe te ajuda a debugar.
-                                    </div>
-                                </div>
-                            </div>
+Note como o card foi restrito a `col-lg-5` para não ficar absurdamente largo no desktop, mas ocupará `col-12` no mobile. O botão `.w-100` garante que no celular seja muito fácil clicar para comprar. A âncora de valor (De R$ 997 por R$ 297) é um clássico de infoprodutos.
 
-                            <div class="accordion-item bg-body">
-                                <h3 class="accordion-header" id="faqHeading3">
-                                    <button class="accordion-button collapsed fw-bold py-3 fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
-                                        Por quanto tempo terei acesso ao curso?
-                                    </button>
-                                </h3>
-                                <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#accordionFaq">
-                                    <div class="accordion-body text-body-secondary pt-0 pb-4">
-                                        O acesso a esta oferta é vitalício. Isso inclui todas as atualizações futuras dos módulos básicos (HTML, CSS, JS) sem nenhum custo adicional.
-                                    </div>
-                                </div>
-                            </div>
+### **Fase 5: FAQ e Footer** 
 
-                            <div class="accordion-item bg-body">
-                                <h3 class="accordion-header" id="faqHeading4">
-                                    <button class="accordion-button collapsed fw-bold py-3 fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
-                                        E se eu não gostar da metodologia?
-                                    </button>
-                                </h3>
-                                <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#accordionFaq">
-                                    <div class="accordion-body text-body-secondary pt-0 pb-4">
-                                        Você está protegido pela nossa garantia incondicional de 7 dias. Se você assistir às primeiras aulas e achar que o curso não é para você, basta um e-mail e devolvemos 100% do seu dinheiro, sem burocracia.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        <footer class="bg-body-tertiary border-top border-secondary-subtle py-5 mt-5">
-            <div class="container">
-                <div class="row align-items-center flex-column flex-md-row text-center text-md-start">
-                    
-                    <div class="col-12 col-md-6 mb-3 mb-md-0">
-                        <span class="fs-5 fw-bold text-primary mb-2 d-block">
-                            <span class="text-white">Dev</span>Start
-                        </span>
-                        <p class="text-muted small mb-0">
-                            &copy; 2026 DevStart Treinamentos. Todos os direitos reservados.
-                        </p>
-                    </div>
-
-                    <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end">
-                        <ul class="list-inline mb-0 small">
-                            <li class="list-inline-item me-3">
-                                <a href="#" class="text-muted text-decoration-none text-hover-primary">Termos de Uso</a>
-                            </li>
-                            <li class="list-inline-item me-3">
-                                <a href="#" class="text-muted text-decoration-none text-hover-primary">Política de Privacidade</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="text-muted text-decoration-none text-hover-primary">Contato</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </footer>
-    </main>
-
-</body>
-</html>

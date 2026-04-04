@@ -1,464 +1,61 @@
-/* =========================
-   VARIAVEIS E BASE GLOBAL
-========================= */
-
-/* Define a paleta de cores e sombras padrão do projeto. Isso garante consistência visual em todas as telas, transmitindo profissionalismo e facilitando o reconhecimento da marca pelo usuário. */
-:root {
-	--bg-page: #081826;
-	--bg-surface: #0f2436;
-	--bg-soft: #12304a;
-	--bg-card: rgba(16, 40, 61, 0.86);
-	--text-main: #f4f7fb;
-	--text-muted: rgba(236, 244, 255, 0.76);
-	--brand: #ffbc42;
-	--brand-strong: #f59e0b;
-	--stroke: rgba(203, 219, 235, 0.3);
-	--shadow-soft: 0 10px 30px rgba(1, 7, 14, 0.35);
-}
-
-/* Ajusta o modelo de caixa para evitar que bordas e espaçamentos quebrem o layout. O usuário se beneficia com uma interface estável e previsível em qualquer dispositivo. */
-* {
-	box-sizing: border-box;
-}
-
-/* Remove margens padrão do navegador para usar 100% do espaço da tela. Cria uma experiência imersiva, sem bordas brancas indesejadas nas extremidades. */
-html,
-body {
-	margin: 0;
-	padding: 0;
-}
-
-/* Aplica a fonte principal, cores de contraste e um fundo escuro com gradientes suaves. Isso reduz o cansaço visual e cria uma atmosfera moderna e convidativa para a leitura. */
-body {
-	font-family: "Space Grotesk", sans-serif;
-	color: var(--text-main);
-	background:
-		radial-gradient(circle at 8% 15%, rgba(255, 188, 66, 0.18), transparent 25%),
-		radial-gradient(circle at 80% 25%, rgba(74, 222, 128, 0.12), transparent 20%),
-		linear-gradient(140deg, #06121d 0%, #0b1f30 45%, #112f48 100%);
-	min-height: 100vh;
-}
-
-/* Cria um recuo invisível no topo ao clicar em links internos. Evita que o cabeçalho fixo esconda o título da seção, melhorando a precisão da navegação. */
-main section {
-	scroll-margin-top: 5.5rem;
-}
-
-/* Destaca os títulos com uma tipografia mais encorpada e espaçada. Ajuda o leitor a escanear a página rapidamente e identificar os tópicos de maior interesse. */
-h1,
-h2,
-h3,
-.brand {
-	font-family: "Bricolage Grotesque", sans-serif;
-	letter-spacing: 0.2px;
-}
-
-/* Remove o azul e o sublinhado padrão dos links, integrando-os ao texto. Reduz a poluição visual, tornando a leitura contínua e mais agradável. */
-a {
-	color: inherit;
-	text-decoration: none;
-}
-
-/* =========================
-   ACESSIBILIDADE E FOCO
-========================= */
-
-/* Cria um atalho oculto que só aparece ao navegar pelo teclado. É essencial para acessibilidade, permitindo pular o menu e ir direto ao conteúdo. */
-.skip-link {
-	position: absolute;
-	left: -999px;
-	top: -999px;
-	background: #ffffff;
-	color: #03101b;
-	padding: 0.7rem 1rem;
-	border-radius: 0.4rem;
-	z-index: 1000;
-}
-
-/* Posiciona o atalho de acessibilidade na tela de forma amigável quando ativado. Garante que quem usa teclado saiba exatamente onde está interagindo. */
-.skip-link:focus,
-.skip-link:focus-visible {
-	left: 1rem;
-	top: 1rem;
-}
-
-/* Destaca elementos focados com um contorno luminoso. Fundamental para guiar usuários que não usam mouse, indicando claramente qual item está selecionado. */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-	outline: 3px solid var(--brand);
-	outline-offset: 2px;
-	box-shadow: 0 0 0 4px rgba(255, 188, 66, 0.22);
-}
-
-/* =========================
-   TOPO E NAVEGACAO
-========================= */
-
-/* Aplica um efeito de vidro fosco no menu superior. Mantém a navegação sempre visível e elegante, sem bloquear completamente a visão do conteúdo por trás. */
-.site-header {
-	backdrop-filter: blur(12px);
-	background: rgba(4, 16, 27, 0.84);
-}
-
-/* Aumenta o destaque do nome do curso no topo. Serve como um ponto de referência rápido para o usuário saber em que site está navegando. */
-.brand {
-	font-size: 1.35rem;
-	font-weight: 800;
-}
-
-/* Deixa os links do menu com cores neutras e transições suaves. Prepara a interface para interações agradáveis e sem reações bruscas. */
-.site-header .nav-link {
-	color: var(--text-muted);
-	border-radius: 0.5rem;
-	transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-/* Clareia o texto e adiciona um fundo sutil ao passar o mouse. Dá um feedback visual rápido, confirmando que o item é clicável. */
-.site-header .nav-link:hover {
-	color: var(--text-main);
-	background-color: rgba(255, 255, 255, 0.08);
-}
-
-/* =========================
-   HERO + POSICIONAMENTO
-========================= */
-
-/* Isola a área inicial para que decorações de fundo não interfiram nos botões. Garante uma área limpa onde o usuário pode ler e clicar sem frustrações. */
-.hero {
-	position: relative;
-	isolation: isolate;
-}
-
-/* Posiciona formas decorativas no fundo e bloqueia interações com elas. Evita que cliques acidentais nos grafismos atrapalhem o uso da página. */
-div.shape {
-	position: absolute;
-	pointer-events: none;
-	z-index: -1;
-}
-
-/* Cria um ponto de luz focado no topo da página. Atrai o olhar do visitante diretamente para a oferta principal de forma natural. */
-.shape-orb {
-	width: 17rem;
-	height: 17rem;
-	border-radius: 50%;
-	top: 2rem;
-	right: 6%;
-	background: radial-gradient(circle, rgba(255, 188, 66, 0.55), rgba(255, 188, 66, 0) 65%);
-}
-
-/* Adiciona um anel decorativo sutil na parte inferior. Equilibra o design da tela inicial, transmitindo uma sensação de sofisticação visual. */
-.shape-ring {
-	width: 13rem;
-	height: 13rem;
-	left: -2rem;
-	bottom: 0;
-	border-radius: 50%;
-	border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-/* Destaca as áreas de dados e formulário com fundos mais escuros e sombras. Direciona a atenção do usuário imediatamente para as informações de conversão. */
-.stats-card,
-.enroll-box {
-	background: linear-gradient(160deg, rgba(14, 36, 54, 0.95), rgba(9, 24, 38, 0.85));
-	box-shadow: var(--shadow-soft);
-}
-
-/* Faz os elementos surgirem suavemente de baixo para cima ao carregar a página. Essa animação prende a atenção de forma elegante, reduzindo a sensação de espera. */
-.hero h1,
-.hero p,
-.hero .btn,
-.hero .stats-card,
-.trust-item,
-.journey-step,
-.testimonial-card,
-.faq-item,
-.enroll-box {
-	animation: rise-in 0.7s ease both;
-}
-
-/* Atrasa a entrada do texto de apoio para aparecer logo após o título principal. Induz o leitor a consumir a mensagem na ordem lógica de importância. */
-.hero p {
-	animation-delay: 0.1s;
-}
-
-/* Faz os botões aparecerem apenas depois que o usuário leu a introdução. Evita forçar uma decisão antes que o contexto seja compreendido. */
-.hero .btn {
-	animation-delay: 0.2s;
-}
-
-/* Exibe a prova social por último na animação inicial. Serve como argumento final para fechar o raciocínio de valor na mente do visitante. */
-.hero .stats-card {
-	animation-delay: 0.26s;
-}
-
-/* =========================
-   CARDS E GRID DE TOPICOS
-========================= */
-
-/* Adiciona rótulos coloridos e leves aos títulos de seção. Ajuda a categorizar visualmente o conteúdo sem pesar a leitura. */
-.section-heading .module-badge {
-	background: rgba(255, 188, 66, 0.14);
-	color: #ffe4ab;
-	border: 1px solid rgba(255, 188, 66, 0.5);
-}
-
-/* Transforma o conteúdo em blocos independentes com cantos arredondados e gradientes. Facilita a compreensão das informações dividindo-as em porções menores. */
-.card {
-	background: linear-gradient(180deg, rgba(18, 48, 74, 0.72), rgba(12, 33, 52, 0.85));
-	color: var(--text-main);
-	border-radius: 1rem;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Eleva o cartão e intensifica a sombra ao passar o mouse. Dá a sensação tátil e o feedback claro de que o bloco é interativo. */
-.card:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 14px 34px rgba(2, 8, 14, 0.4);
-}
-
-/* Aplica uma faixa de fundo levemente diferenciada. Quebra a monotonia da rolagem e sinaliza claramente uma mudança de assunto no site. */
-.project-strip {
-	background: linear-gradient(180deg, rgba(5, 17, 28, 0.18), rgba(5, 17, 28, 0.42));
-}
-
-/* Cria um contêiner estrutural para agrupar as estatísticas. Garante que essas informações se mantenham estáveis e alinhadas na tela. */
-.trust-bar {
-	position: relative;
-}
-
-/* Coloca cada métrica em caixas individuais com bordas suaves. Permite que os dados de sucesso do curso sejam lidos rapidamente. */
-.trust-item {
-	background: linear-gradient(155deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-	border: 1px solid rgba(255, 255, 255, 0.16);
-	border-radius: 0.9rem;
-	padding: 1rem;
-	text-align: center;
-}
-
-/* Aumenta drasticamente o tamanho e a cor dos números. Captura a atenção imediatamente, transmitindo autoridade antes mesmo de o texto ser lido. */
-.trust-number {
-	font-family: "Bricolage Grotesque", sans-serif;
-	font-size: 1.5rem;
-	font-weight: 800;
-	color: #ffe3a3;
-}
-
-/* Deixa a descrição do número mais discreta. Equilibra a leitura, dando suporte ao dado principal sem roubar a atenção dele. */
-.trust-label {
-	color: var(--text-muted);
-}
-
-/* Organiza os itens em uma grade uniforme de colunas. Oferece uma visão panorâmica, facilitando a escolha do que ler primeiro. */
-.topics-grid {
-	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 1rem;
-}
-
-/* Isola cada tópico em um quadro claro e com sombra leve. Destaca individualmente as habilidades ou projetos oferecidos no curso. */
-.topics-grid .topic {
-	background: var(--bg-surface);
-	border: 1px solid var(--stroke);
-	border-radius: 0.9rem;
-	padding: 1rem;
-	box-shadow: var(--shadow-soft);
-}
-
-/* Cria blocos padronizados para o passo a passo. Transmite a sensação de um caminho seguro, guiado e bem estruturado a ser percorrido. */
-.journey-step {
-	background: var(--bg-card);
-	border: 1px solid rgba(198, 217, 235, 0.28);
-	border-radius: 1rem;
-	padding: 1.2rem;
-	box-shadow: var(--shadow-soft);
-}
-
-/* Desenha círculos numerados e coloridos em cada etapa. Funciona como um marcador visual forte que guia a ordem exata de estudo. */
-.step-index {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 2.1rem;
-	height: 2.1rem;
-	border-radius: 999px;
-	background: rgba(255, 188, 66, 0.22);
-	color: #ffd37c;
-	font-weight: 700;
-}
-
-/* Escurece sutilmente a área de depoimentos. Cria um clima que destaca e valoriza a opinião de outros alunos. */
-.testimonials-wrap {
-	background: linear-gradient(180deg, rgba(7, 23, 37, 0.62), rgba(7, 23, 37, 0.2));
-}
-
-/* Enquadra cada depoimento em uma caixa destacada. Separa as experiências de terceiros do resto da página, aumentando a credibilidade. */
-.testimonial-card {
-	background: var(--bg-card);
-	border: 1px solid rgba(210, 227, 241, 0.3);
-	border-radius: 1rem;
-	padding: 1.2rem;
-	box-shadow: var(--shadow-soft);
-}
-
-/* Aplica uma faixa separadora para as dúvidas frequentes. Organiza o final da página, preparando o usuário para solucionar objeções. */
-.faq-wrap {
-	background: linear-gradient(180deg, rgba(8, 23, 36, 0.25), rgba(8, 23, 36, 0.42));
-}
-
-/* Coloca cada pergunta em uma caixa expansível. Economiza espaço e evita assustar o usuário com uma parede de texto. */
-.faq-item {
-	background: var(--bg-card);
-	border: 1px solid rgba(214, 229, 242, 0.28);
-	border-radius: 0.9rem;
-	padding: 1rem;
-	box-shadow: var(--shadow-soft);
-}
-
-/* Transforma a pergunta em um botão clicável e em negrito. Deixa claro que há uma resposta escondida aguardando interação. */
-.faq-item summary {
-	cursor: pointer;
-	font-weight: 700;
-	list-style: none;
-}
-
-/* Remove a setinha padrão dos navegadores. Mantém o design mais limpo e fiel à identidade do projeto. */
-.faq-item summary::-webkit-details-marker {
-	display: none;
-}
-
-/* Adiciona um sinal de "+" no lado direito da pergunta. Indica visualmente de forma muito intuitiva que o painel pode ser aberto. */
-.faq-item summary::after {
-	content: "+";
-	float: right;
-	color: #ffd37c;
-}
-
-/* Troca o sinal para "-" quando o painel é aberto. Comunica instantaneamente que a ação agora é fechar a resposta. */
-.faq-item[open] summary::after {
-	content: "-";
-}
-
-/* Dá um respiro e clareia a cor do texto da resposta. Torna a leitura da explicação mais leve e direta. */
-.faq-item p {
-	margin-top: 0.8rem;
-	color: var(--text-muted);
-}
-
-/* =========================
-   FORMULARIO
-========================= */
-
-/* Destaca os campos de digitação com fundos claros e bordas bem definidas. Evita erros guiando perfeitamente onde os dados devem ser inseridos. */
-.form-control,
-.form-select {
-	background-color: rgba(255, 255, 255, 0.94);
-	border: 1px solid #ced6df;
-}
-
-/* Deixa o texto de exemplo do campo em tom acinzentado. Oferece uma dica visual útil sem confundir com os dados que o usuário vai digitar. */
-.form-control::placeholder {
-	color: #5e6770;
-}
-
-/* =========================
-   BOTAO FLUTUANTE FIXO
-========================= */
-
-/* Fixa um botão de ação no canto inferior da tela. Garante que o atalho principal esteja sempre acessível, independentemente de onde o usuário esteja lendo. */
-.floating-cta {
-	position: fixed;
-	right: 1rem;
-	bottom: 1rem;
-	border-radius: 999px;
-	box-shadow: var(--shadow-soft);
-	z-index: 60;
-}
-
-/* Dá cores vibrantes e alto contraste ao botão principal. Indica claramente qual é a ação mais importante (matrícula) que o usuário deve tomar. */
-.btn-warning {
-	background-color: var(--brand);
-	border-color: var(--brand);
-	color: #0c1521;
-	font-weight: 700;
-}
-
-/* Escurece levemente o botão ao passar o mouse. Confirma para o usuário que o sistema reconheceu sua intenção de clicar. */
-.btn-warning:hover {
-	background-color: var(--brand-strong);
-	border-color: var(--brand-strong);
-}
-
-/* Ajusta a cor do texto no botão secundário ao ser focado. Garante que a escrita continue perfeitamente legível durante a interação no hover. */
-.btn-outline-light:hover {
-	color: #0b1622;
-}
-
-/* Define a animação suave de subida e aparição. Torna a chegada dos elementos na tela mais amigável e moderna. */
-@keyframes rise-in {
-	from {
-		opacity: 0;
-		transform: translateY(14px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-/* Detecta se o usuário prefere menos animações no sistema. Respeita a saúde e conforto visual de pessoas sensíveis a movimentos na tela. */
-@media (prefers-reduced-motion: reduce) {
-	/* Desliga todas as animações e transições. Garante uma navegação totalmente estática e confortável para quem possui essa necessidade de acessibilidade. */
-	*,
-	*::before,
-	*::after {
-		animation: none !important;
-		transition: none !important;
-		scroll-behavior: auto !important;
-	}
-}
-
-/* =========================
-   MEDIA QUERIES
-========================= */
-
-/* Ajusta o layout para telas médias (tablets). Evita que o conteúdo fique apertado ou ilegível quando o espaço horizontal diminui. */
-@media (max-width: 992px) {
-	/* Reduz a grade de quatro para duas colunas. Dá mais espaço para os blocos respirarem sem espremer o texto. */
-	.topics-grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	/* Diminui o tamanho do enfeite luminoso de fundo. Evita que o grafismo atrapalhe a leitura dos textos no espaço reduzido. */
-	.shape-orb {
-		width: 12rem;
-		height: 12rem;
-		right: -2rem;
-	}
-
-	/* Reduz levemente o tamanho dos números gigantes de sucesso. Impede que o texto vaze e quebre o design das caixas mais estreitas. */
-	.trust-number {
-		font-size: 1.3rem;
-	}
-}
-
-/* Reorganiza totalmente a página para celulares. Foca a experiência no uso vertical e em interações fáceis com o polegar. */
-@media (max-width: 576px) {
-	/* Diminui a fonte do logotipo no menu. Garante que o topo da página caiba em uma linha só, mantendo a organização. */
-	.brand {
-		font-size: 1.1rem;
-	}
-
-	/* Muda a grade para apenas uma coluna. Facilita muito a leitura e rolagem no celular, apresentando um card por vez. */
-	.topics-grid {
-		grid-template-columns: 1fr;
-	}
-
-	/* Aproxima o botão fixo das bordas da tela. Libera espaço central para a leitura sem perder o acesso rápido à ação principal. */
-	.floating-cta {
-		right: 0.75rem;
-		bottom: 0.75rem;
-		padding-inline: 0.8rem;
-	}
-}
+/* 1. Navegação Suave para âncoras */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 2. Animação de Entrada (Fade In Up) na Hero Section */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .hero-section .container {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        /* 3. Micro-interação: Elevação de Cards nos Benefícios e Preço */
+        /* Aplicamos uma transição suave na propriedade transform e box-shadow */
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            will-change: transform; /* Otimização de performance para o navegador */
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            /* Usamos !important para sobrescrever utilitários shadow-sm/shadow-lg do Bootstrap temporariamente no hover */
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3) !important; 
+            border-color: var(--bs-primary) !important; /* Destaca a borda sutilmente com a cor primária (azul) */
+        }
+
+        /* 4. Animação de Foco: Pulsação no CTA da Oferta */
+        @keyframes pulseAttention {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.7); /* Azul primary do BS5 */
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(13, 110, 253, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(13, 110, 253, 0);
+            }
+        }
+        
+        /* Direcionamos especificamente para o botão dentro da oferta */
+        #oferta .btn-primary {
+            animation: pulseAttention 2s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+        
+        /* Desativar pulsação quando o usuário interagir (hover/focus) para não incomodar */
+        #oferta .btn-primary:hover,
+        #oferta .btn-primary:focus {
+            animation: none;
+            transform: scale(1.02);
+        }
