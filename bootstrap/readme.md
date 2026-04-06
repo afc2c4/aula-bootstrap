@@ -20,15 +20,15 @@ Para que as nossas escolhas de classes visuais, pesos de tipografia e estrutura 
 3.  **Identidade Visual:** Qual é a *vibe* desejada para a página? (ex: Tema escuro/Cyberpunk com tons de neon, ou Tema claro/Clean e corporativo com azul e branco?).
 
 ---
-O curso é focado em base, para conseguir a primeira vaga em 6 meses, tema escuro/clean e corporativo com azul e branco
+
+Para facilitar o entendimento dos conceitos de desenvolvimento de site e do framework Bootstrap, o curso é focado em base, com finalidade de conseguir a primeira vaga em 6 meses, tema escuro/clean e corporativo com azul e branco.
 
 ---
 
-Excelente direcionamento. O foco em iniciantes e a promessa de "primeira vaga em 6 meses" nos dá um alvo claríssimo para a conversão. A escolha do tema escuro com tons corporativos (azul e branco) transmite modernidade e, ao mesmo tempo, segurança e estabilidade, características fundamentais para quem está buscando entrar no mercado de trabalho.
+O foco em iniciantes e a promessa de "primeira vaga em 6 meses" nos dá um alvo claríssimo para a conversão. A escolha do tema escuro com tons corporativos (azul e branco) transmite modernidade e, ao mesmo tempo, segurança e estabilidade, características fundamentais para quem está buscando entrar no mercado de trabalho.
 
-Vamos iniciar a **Fase 1: Setup, Navbar e Hero Section (Acima da Dobra)**.
 
-### Defesa Arquitetural e Semântica (Fase 1)
+### **Fase 1: Setup, Navbar e Hero Section (Acima da Dobra)**
 
 1.  **Setup e Tema Nativo (Bootstrap 5.3):** No HTML5, usaremos o atributo `data-bs-theme="dark"` direto na tag `<html>`. Isso aproveita o sistema de cores nativo da versão 5.3 para o tema escuro, garantindo fundos escuros e textos com contraste adequado (branco/cinza claro) sem precisarmos escrever CSS customizado nesta etapa.
 2.  **Semântica de Cabeçalho (`<header>` e `<nav>`):** O menu de navegação ficará dentro de um `<header>` semântico. Usaremos a classe `.fixed-top` na Navbar. *Por que?* Em Landing Pages longas, o CTA principal deve estar sempre a um clique de distância. Ter um botão "Garantir Vaga" no menu fixo aumenta drasticamente a taxa de conversão.
@@ -281,9 +281,6 @@ Aqui está o código inicial e a estrutura da Fase 1:
 
 ### **Fase 2 (Dores e Benefícios)**
 
-Perfeito. Vamos avançar para a **Fase 2: Seção de Dores/Benefícios (Prova de Valor)**. 
-
-### Defesa Arquitetural e Semântica (Fase 2)
 
 Agora que prendemos a atenção do usuário na Hero com a promessa, precisamos gerar conexão e mostrar que entendemos o problema dele. Para um iniciante querendo a primeira vaga em 6 meses, a maior dor costuma ser o "Tutorial Hell" (ficar preso copiando tutoriais sem entender a base) e a falta de um portfólio real.
 
@@ -589,11 +586,7 @@ Aqui está o código. Ele deve ser inserido logo após o fechamento da `<section
 
 ### **Fase 3: Grade Curricular (O Conteúdo)**
 
-Excelente. Chegamos ao "coração" do produto: **Fase 3: Grade Curricular (O Conteúdo)**.
-
-### Defesa Arquitetural e Semântica (Fase 3)
-
-Apresentar a ementa de um curso pode facilmente poluir a tela e assustar um iniciante. A estratégia de UI/UX aqui é usar a **Divulgação Progressiva** (Progressive Disclosure) através do componente Accordion do Bootstrap.
+Chegamos ao "coração" do produto. Apresentar a ementa de um curso pode facilmente poluir a tela e assustar um iniciante. A estratégia de UI/UX aqui é usar a **Divulgação Progressiva** (Progressive Disclosure) através do componente Accordion do Bootstrap.
 
 1.  **Semântica e Acessibilidade (ARIA):** * Iniciaremos a `<section id="curriculo">`. Retornaremos ao fundo padrão (`.bg-body`) para criar o contraste com a seção anterior.
     * Como estamos escrevendo o HTML puro agora, a preparação para o comportamento dinâmico (abrir/fechar) exige extrema atenção aos atributos do Bootstrap (`data-bs-toggle`, `data-bs-target`) e atributos ARIA (`aria-expanded`, `aria-controls`). Quando o JS do Bootstrap for injetado posteriormente, os leitores de tela saberão exatamente qual botão controla qual painel de conteúdo.
@@ -941,13 +934,12 @@ A estrutura de conteúdo baseada no componente Accordion `.accordion-flush` empa
 
 ### **Fase 4: Oferta, Pricing e Garantia (Fechamento)**
 
-Excelente. Chegamos ao momento de "fechar a venda": **Fase 4: Oferta, Pricing e Garantia**.
-
-### Defesa Arquitetural e Semântica (Fase 4)
+Chegamos ao momento de "fechar a venda".
 
 A seção de preços é onde a conversão acontece ou morre. O design aqui precisa remover qualquer atrito cognitivo e passar extrema segurança.
 
-1.  **Semântica (`<section>`, `<article>` ou Card):** * Vamos criar uma `<section id="oferta">` (alvo dos nossos botões CTA anteriores).
+1.  **Semântica (`<section>`, `<article>` ou Card):** 
+    * Vamos criar uma `<section id="oferta">` (alvo dos nossos botões CTA anteriores).
     * O elemento do preço em si será construído usando a estrutura de `.card` do Bootstrap, que semanticamente agrupa a oferta.
 2.  **Contraste Absoluto (Foco Visual):**
     * Aplicaremos um fundo levemente mais escuro ou usaremos um utilitário de gradiente/sombra intensa no card para destacá-lo do resto da página. O card receberá a classe `.border-primary` para mostrar que é a ação principal.
@@ -1159,9 +1151,6 @@ Note como o card foi restrito a `col-lg-5` para não ficar absurdamente largo no
 
 ### **Fase 5: FAQ e Footer** 
 
-Perfeito. Vamos para a penúltima etapa prática: **Fase 5: FAQ (Perguntas Frequentes) e Footer (Rodapé)**.
-
-### Defesa Arquitetural e Semântica (Fase 5)
 
 O papel do FAQ em uma Landing Page não é apenas informar, é **quebrar objeções de última hora**. Se o usuário rolou até aqui e não comprou, ele tem dúvidas. O rodapé, por sua vez, traz o peso corporativo e de conformidade (essencial para aprovação de anúncios no Google Ads e Meta Ads).
 
@@ -1399,8 +1388,6 @@ Com o fechamento da tag `<footer>`, praticamente concluímos o esqueleto visual 
 
 Adicionar uma camada de CSS3 puro para animações e transições transforma uma página "dura" em uma experiência fluida e profissional, aumentando a percepção de valor do produto sem sacrificar a performance com bibliotecas pesadas de JavaScript.
 
-### Defesa Arquitetural e Semântica (Fase 5.1)
-
 Como combinamos que não haverá JavaScript, não podemos usar técnicas como *Scroll Reveal* (elementos surgindo à medida que a página rola), pois isso exige monitoramento do DOM. No entanto, com CSS3 puro, podemos atacar três frentes fundamentais para conversão:
 
 1.  **Navegação Suave (`scroll-behavior`):** Como nossa Navbar e nossos botões usam links âncora (ex: `href="#oferta"`), o salto nativo do HTML é abrupto. Vamos ativar o *smooth scroll* direto na tag `<html>`.
@@ -1408,6 +1395,8 @@ Como combinamos que não haverá JavaScript, não podemos usar técnicas como *S
 3.  **Feedback Tátil/Visual (Hover em Cards):** Na seção de Benefícios (Fase 2) e no Card de Preços (Fase 4), adicionaremos uma transição onde o card "levanta" (`translateY`) e ganha uma sombra mais forte quando o usuário passa o mouse. Isso indica instintivamente que a área é interativa.
 
 Aqui está o bloco de código CSS. Ele deve ser inserido dentro da tag `<head>`, logo após a chamada do arquivo CSS do Bootstrap:
+
+Obs: Pode colocar o CSS em arquivo separado (styles.css) também. Mas não esqueça de colocar o link da folha no cabeçalho;
 
 ```html
     <!-- 
